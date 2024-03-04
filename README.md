@@ -4,10 +4,10 @@ The Translatable package is a powerful tool designed for Laravel applications th
 
 Key features include:
 
-1. Automatic Scanning: Scours PHP files throughout your Laravel application to identify all instances of translation keys.
-2. Dynamic Translation Management: Automatically updates JSON translation files for each configured language, ensuring that no translation key is left undefined.
-3. Configurable and Extensible: Offers flexible configuration options, including customizable paths for scanning and exclusion rules to skip directories like vendor or node_modules.
-4. Streamlined Localization Workflow: Simplifies the localization process, making it easier to manage translations across large and complex applications.
+1. **Automatic Scanning**: Scours PHP files throughout your Laravel application to identify all instances of translation keys.
+2. **Dynamic Translation Management**: Automatically updates JSON translation files for each configured language, ensuring that no translation key is left undefined.
+3. **Configurable and Extensible**: Offers flexible configuration options, including customizable paths for scanning and exclusion rules to skip directories like vendor or node_modules.
+4. **Streamlined Localization Workflow**: Simplifies the localization process, making it easier to manage translations across large and complex applications.
 Whether you're building a small project or a large enterprise application, Translatable helps keep your translations organized and in sync, facilitating a smoother development process and a better user experience for multi-language applications.
 
 ## Installation
