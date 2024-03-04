@@ -1,6 +1,5 @@
 <?php
 
-
 use Illuminate\Support\Facades\File;
 use Translatable\Translatable\Commands\TranslatableCommand;
 
@@ -10,11 +9,11 @@ it('can found translatable files in resources', function () {
 
     File::ensureDirectoryExists($path);
 
-    if (!File::exists($path)) {
+    if (! File::exists($path)) {
         File::makeDirectory($path, 0755, true);
     }
 
-    File::put("{$path}/en.json", json_encode(["Testing" => ""]));
+    File::put("{$path}/en.json", json_encode(['Testing' => '']));
 
     expect(app(TranslatableCommand::class)
         ->getTranslatableFiles())
