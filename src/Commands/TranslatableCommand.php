@@ -9,8 +9,8 @@ use RegexIterator;
 
 class TranslatableCommand extends Command
 {
-    protected $signature = 'skeleton:check-translations';
-    protected $description = 'Check PHP files for translations and compare with en.json';
+    protected $signature = 'app:check-translations';
+    protected $description = 'Check PHP files for translations and compare with location json files';
 
     public function handle(): int
     {
@@ -18,11 +18,11 @@ class TranslatableCommand extends Command
 
         if (empty($translatableFilePaths)) {
             $this->warn('No translatable files found');
+
             return 0;
         }
 
-        $directory = base_path() . '/app';
-        $files = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($directory));
+        $files = new RecursiveIteratorIterator(new RecursiveDirectoryIterator(base_path() . '/app'));
         $phpFiles = new RegexIterator($files, '/\.php$/');
 
 
@@ -36,9 +36,8 @@ class TranslatableCommand extends Command
                         $this->info("Found translation: $match in file " . $phpFile->getRealPath());
 
                         foreach ($translatableFilePaths as $path) {
-                            $path = $path[0];
-
                             $translationContent = json_decode(file_get_contents($path), true);
+
                             if (!array_key_exists($match, $translationContent)) {
                                 $translationContent[$match] = "";
                                 file_put_contents($path, json_encode($translationContent, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
@@ -49,6 +48,7 @@ class TranslatableCommand extends Command
                 }
             }
         }
+
         return 1;
     }
 
@@ -56,18 +56,27 @@ class TranslatableCommand extends Command
     {
         $availableCountries = config('translatable.available_countries');
         $translatableFilePaths = [];
-        $iterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator(base_path()));
+        $iterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator(config('translatable.translation_files_path')));
 
         foreach ($availableCountries as $countryCode) {
             foreach ($iterator as $file) {
-                if ($file->isDir() || strpos($file->getRealPath(), DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR)) {
+
+                if ($file->isDir()) {
+
+                    if (strpos($file->getRealPath(), '/vendor/')) {
+                        continue;
+                    }
+
                     continue;
                 }
 
                 $fileName = "{$countryCode}.json";
 
                 if ($file->getFilename() === $fileName) {
-                    $this->info("Found translation file for: {$fileName}");
+                    if (!app()->runningUnitTests()) {
+                        $this->info("Found translation file for: {$fileName}");
+                    }
+
                     $translatableFilePaths[] = $file->getRealPath();
                 }
             }

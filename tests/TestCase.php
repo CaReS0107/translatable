@@ -13,24 +13,19 @@ class TestCase extends Orchestra
         parent::setUp();
 
         Factory::guessFactoryNamesUsing(
-            fn (string $modelName) => 'Translatable\\Translatable\\Database\\Factories\\'.class_basename($modelName).'Factory'
+            static fn(string $modelName) => 'Translatable\\Translatable\\Database\\Factories\\' . class_basename($modelName) . 'Factory'
         );
     }
 
-    protected function getPackageProviders($app)
+    protected function getPackageProviders($app): array
     {
         return [
             TranslatableServiceProvider::class,
         ];
     }
 
-    public function getEnvironmentSetUp($app)
+    public function getEnvironmentSetUp($app): void
     {
         config()->set('database.default', 'testing');
-
-        /*
-        $migration = include __DIR__.'/../database/migrations/create_translatable_table.php.stub';
-        $migration->up();
-        */
     }
 }
