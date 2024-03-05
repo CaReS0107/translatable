@@ -31,7 +31,9 @@ return [
     'available_countries' => [
             'en', 'nl',
         ],
+
     'translation_files_path' => base_path(),
+
     'exclude_paths' => [
         '/vendor/',
         '/node_modules/',
