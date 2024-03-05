@@ -39,10 +39,11 @@ class TranslatableCommand extends Command
 
             if (preg_match_all("/__\(['\"](.*?)['\"]\)/", $content, $matches)) {
                 foreach ($matches[1] as $match) {
+                    $match = stripslashes($match);
                     $this->info("Found translation: $match in file ".$phpFile->getRealPath());
 
                     foreach ($translatableFilePaths as $path) {
-                        $translationContent = json_decode(file_get_contents($path), true);
+                        $translationContent = json_decode(file_get_contents($path), true, 512, JSON_THROW_ON_ERROR);
 
                         if (! array_key_exists($match, $translationContent)) {
                             $translationContent[$match] = '';
