@@ -4,8 +4,7 @@
     "keywords": [
         "translatable",
         "laravel",
-        "translation",
-        "php"
+        "translation"
     ],
     "homepage": "https://github.com/cares0107/translatable",
     "license": "MIT",
@@ -22,6 +21,7 @@
         "illuminate/contracts": "^10.0"
     },
     "require-dev": {
+        "roave/security-advisories": "dev-latest",
         "larastan/larastan": "^2.0.1",
         "laravel/pint": "^1.0",
         "nunomaduro/collision": "^7.8",
