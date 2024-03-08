@@ -1,10 +1,11 @@
 {
     "name": "cares0107/translatable",
-    "description": "This is my package translatable",
+    "description": "This is laravel translatable package",
     "keywords": [
         "translatable",
         "laravel",
-        "translatable"
+        "translation",
+        "php",
     ],
     "homepage": "https://github.com/cares0107/translatable",
     "license": "MIT",
