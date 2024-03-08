@@ -4,8 +4,8 @@ use Illuminate\Support\Facades\File;
 use Translatable\Translatable\Commands\TranslatableCommand;
 
 it('can found translatable files in resources', function () {
-    config()->set('translatable.translation_files_path', $path = resource_path('lang'));
-    config()->set('translatable.available_countries', ['en']);
+    config()->set('translation.translation_files_path', $path = resource_path('lang'));
+    config()->set('translation.available_countries', ['en']);
 
     File::ensureDirectoryExists($path);
 

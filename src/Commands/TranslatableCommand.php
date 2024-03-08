@@ -60,10 +60,10 @@ class TranslatableCommand extends Command
 
     public function getTranslatableFiles(): array
     {
-        $availableCountries = config('translatable.available_countries');
+        $availableCountries = config('translation.available_countries');
         $translatableFilePaths = [];
 
-        $iterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator(config('translatable.translation_files_path')));
+        $iterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator(config('translation.translation_files_path')));
 
         foreach ($availableCountries as $countryCode) {
             foreach ($iterator as $file) {
@@ -74,7 +74,7 @@ class TranslatableCommand extends Command
 
                 $shouldExclude = false;
 
-                foreach (config('translatable.exclude_paths') as $excludePath) {
+                foreach (config('translation.exclude_paths') as $excludePath) {
                     if (str_contains($file->getRealPath(), $excludePath)) {
                         $shouldExclude = true;
                         break;
