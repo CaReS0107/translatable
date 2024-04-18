@@ -47,9 +47,9 @@ class TranslatableCommand extends Command
 
                         if (! array_key_exists($match, $translationContent)) {
 
-                            if($this->isEnglishTranslationFile($path)){
+                            if ($this->isEnglishTranslationFile($path)) {
                                 $translationContent[$match] = $match;
-                            }else{
+                            } else {
                                 $translationContent[$match] = '';
                             }
 
