@@ -12,8 +12,7 @@ class TranslatableServiceProvider extends PackageServiceProvider
     {
         $package
             ->name('translatable')
-            ->hasConfigFile()
-            ->hasViews()
+            ->hasConfigFile('translation')
             ->hasCommand(TranslatableCommand::class);
     }
 }
