@@ -4,7 +4,6 @@
     "keywords": [
         "translatable",
         "laravel",
-        "translation",
         "php"
     ],
     "homepage": "https://github.com/cares0107/translatable",
@@ -17,11 +16,12 @@
         }
     ],
     "require": {
-        "php": "^8.1",
+        "php": "^8.1|8.2|8.3",
         "spatie/laravel-package-tools": "^1.14.0",
         "illuminate/contracts": "^10.0"
     },
     "require-dev": {
+        "roave/security-advisories": "dev-latest",
         "larastan/larastan": "^2.0.1",
         "laravel/pint": "^1.0",
         "nunomaduro/collision": "^7.8",
