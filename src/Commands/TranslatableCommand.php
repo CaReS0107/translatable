@@ -46,7 +46,13 @@ class TranslatableCommand extends Command
                         $translationContent = json_decode(file_get_contents($path), true, 512, JSON_THROW_ON_ERROR);
 
                         if (! array_key_exists($match, $translationContent)) {
-                            $translationContent[$match] = '';
+
+                            if ($this->isEnglishTranslationFile($path)) {
+                                $translationContent[$match] = $match;
+                            } else {
+                                $translationContent[$match] = '';
+                            }
+
                             file_put_contents($path, json_encode($translationContent, JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
                             $this->info("Added missing translation for '{$match}' in '{$path}'");
                         }
@@ -56,6 +62,11 @@ class TranslatableCommand extends Command
         }
 
         return 1;
+    }
+
+    public function isEnglishTranslationFile(string $path): bool
+    {
+        return str_contains($path, 'en.json');
     }
 
     public function getTranslatableFiles(): array
